@@ -80,7 +80,7 @@ export const formatTime = (time: any) => {
 export const stopTimer = (): any => (dispatch: any, getState: any) => {
     const currentWorkedTime = selectWorkedTime(getState());
 
-    dispatch(countTotal({workedTime: currentWorkedTime}));
+    dispatch(countTotal(currentWorkedTime));
     dispatch(stop());
 }
 
