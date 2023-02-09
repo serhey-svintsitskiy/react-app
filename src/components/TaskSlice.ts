@@ -37,12 +37,12 @@ export const taskSlice = createSlice({
         name: "taskSlice",
         initialState,
         reducers: {
-            createTask: (state, action: PayloadAction<TaskInterface>) => {
+            createTask: (state: initalStateInterface, action: PayloadAction<TaskInterface>) => {
                 state.tasks.push(action.payload);
             },
-            completeTask: (state, action: PayloadAction<TaskInterface>) => {
+            completeTask: (state: initalStateInterface, action: PayloadAction<TaskInterface>) => {
                 state.tasks = state.tasks.map(
-                    function (task) {
+                    function (task: TaskInterface) {
                         if (task.id === action.payload.id) {
                             return {...task, complete: !task.complete};
                         } else {
@@ -51,22 +51,22 @@ export const taskSlice = createSlice({
                     }
                 );
                 state.completedTasks.push(action.payload);
-                state.tasks = state.tasks.filter(task => task.complete === false);
+                state.tasks = state.tasks.filter(task => !task.complete);
             },
-            searchTask: (state, action) => {
+            searchTask: (state: initalStateInterface, action: PayloadAction<string>) => {
                 state.searchQuery = action.payload;
             },
-            removeTask: (state, action) => {
+            removeTask: (state: initalStateInterface, action: PayloadAction<TaskInterface>) => {
                 state.tasks = state.tasks.filter(task => task.id !== action.payload.id);
             },
-            setCurrentTask: (state, action) => {
+            setCurrentTask: (state: initalStateInterface, action: PayloadAction<TaskInterface>) => {
                 state.currentTask = action.payload;
             },
-            countTotal: (state, action) => {
+            countTotal: (state: initalStateInterface, action: PayloadAction<number>) => {
                 state.tasks = state.tasks.map(
-                    function (task) {
+                    function (task: TaskInterface) {
                         if (state.currentTask && task.id === state.currentTask.id) {
-                            return {...task, totalTime: task.totalTime + action.payload.workedTime};
+                            return {...task, totalTime: task.totalTime + action.payload};
                         } else {
                             return task;
                         }
