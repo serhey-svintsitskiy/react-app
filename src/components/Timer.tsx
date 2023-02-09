@@ -10,8 +10,10 @@ import {
     selectMode,
     start,
     stopTimer,
+    PomodoroMode
 } from "./TimerSlice";
 import { selectCurrentTask } from "./TaskSlice";
+import Button from 'react-bootstrap/Button';
 
 
 export const Timer = () => {
@@ -42,23 +44,25 @@ export const Timer = () => {
 
 
     return (
-        <div className="timer-content">
-            <div className={mode === "pomodoro" ? "work-mode" : "brake-mode"}>
-                <h3>Status Timer: {mode}</h3>
-                {currentTask ? <h3>Current task: {currentTask.title}</h3> : null}
-                <h2>{formatTime(displayTime)}</h2>
-                {!isPausing
-                    ? <button onClick={() => {
-                            !isWorking ? dispatch(start())
-                                : mode === "pomodoro" ? dispatch(pause()) : dispatch(stopTimer())
-                        }}>
-                            {!isWorking ? "Start" : mode === "pomodoro" ? "Pause" : "Skip brake"}
-                        </button>
-                    : <div>
-                        <button onClick={() => dispatch(start())}>Continue</button>
-                        <button onClick={() => dispatch(stopTimer())}>Stop</button>
-                    </div>
-                }
+        <div className="row justify-content-center box-content-wrapper">
+            <div className="timer-content container-sm">
+                <div className="container p-3 work-mode">
+                    <h3>Status Timer: {mode}</h3>
+                    {currentTask ? <h3>Current task: {currentTask.title}</h3> : ''}
+                    <h2 className="display-1"><span className="fw-bolder">{formatTime(displayTime)}</span></h2>
+                    {!isPausing
+                        ? <Button onClick={() => {
+                                !isWorking ? dispatch(start())
+                                    : mode === PomodoroMode.pomodoro ? dispatch(pause()) : dispatch(stopTimer())
+                            }}>
+                                {!isWorking ? "Start" : mode === PomodoroMode.pomodoro ? "Pause" : "Skip brake"}
+                            </Button>
+                        : <div>
+                            <Button onClick={() => dispatch(start())}>Continue</Button>
+                            <Button onClick={() => dispatch(stopTimer())}>Stop</Button>
+                        </div>
+                    }
+                </div>
             </div>
         </div>
     );

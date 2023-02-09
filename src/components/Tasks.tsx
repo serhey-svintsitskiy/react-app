@@ -3,7 +3,7 @@ import TaskList from "./TaskList";
 
 const Tasks = () => {
     return (
-        <div className="taskBlock">
+        <div className="row justify-content-center taskBlock">
             <TaskForm/>
             <TaskList/>
             <div style={{margin: '5px', border: "5px solid red"}}>IS THIS BLOCK SHOWING?</div>

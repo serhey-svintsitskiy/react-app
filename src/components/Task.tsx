@@ -2,6 +2,10 @@ import { useInView } from "react-intersection-observer";
 import { useDispatch } from "react-redux";
 import { removeTask, completeTask, setCurrentTask } from "./TaskSlice";
 import { startTrackingTask } from "./TimerSlice";
+import Button from 'react-bootstrap/Button';
+import FormCheckInput from 'react-bootstrap/FormCheckInput';
+import CloseButton from 'react-bootstrap/CloseButton';
+
 
 const Task = ({task}: any) => {
     const dispatch = useDispatch();
@@ -15,21 +19,21 @@ const Task = ({task}: any) => {
     });
 
     return (
-        <div ref={ref} className="task" style={{backgroundColor: !inView ? 'red' : 'white'}}>
-            <div style={{
-                padding: '10px',
+        <div ref={ref} className="task p-2" style={{backgroundColor: !inView ? 'red' : 'white'}}>
+            <div 
+                className="gap-3"
+                style={{
                 display: 'flex',
                 flexFlow: 'row',
                 alignContent: 'flex-start',
             }}>
-                <input
+                <FormCheckInput
                     type="checkbox"
                     checked={task.complete}
                     onChange={() => dispatch(completeTask(task))}
                 />
-                <button onClick={() => trackTask(task)}>Play</button>
+                <Button onClick={() => trackTask(task)}>Play</Button>
                 <div style={{
-                    margin: '20px',
                     display: 'flex',
                     flexFlow: 'row wrap',
                     alignContent: 'center',
@@ -45,7 +49,9 @@ const Task = ({task}: any) => {
                 <div style={{margin: '5px'}}>
                     <strong>{task.totalTime} hour</strong>
                 </div>
-                <button style={{marginRight: 'auto'}} onClick={() => dispatch(removeTask(task))}>X</button>
+                <CloseButton
+                    onClick={() => dispatch(removeTask(task))}
+                ></CloseButton>
             </div>
         </div>
     );

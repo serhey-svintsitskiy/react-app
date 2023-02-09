@@ -30,10 +30,6 @@
 }
 
 .taskForm {
-  width: 500px;
-  margin: 10px;
-  display: flex;
-  flex-flow: row;
   justify-content: space-between;
   align-items: center;
   align-content: flex-start;
@@ -44,19 +40,17 @@
 }
 
 .btn-start {
-  border-radius: 5px;
+  border-radius: .5rem;
 }
 
 .task {
-  height: 50px;
-  margin: 5px;
-  padding: 10px;
-  border: 1px solid;
-  border-radius: 5px;
+  margin: .5rem;
+  border: 1px solid #ced4da;
+  border-radius: .5rem;
   display: flex;
   justify-content: space-between;
 }
 
-.create-task {
-  margin: 5px;
+.timer-content > div.container {
+  border-radius: .5rem;
 }

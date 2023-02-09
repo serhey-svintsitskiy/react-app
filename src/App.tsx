@@ -18,7 +18,7 @@ const PomodoreStore = configureStore({
 function App() {
   return (
       <Provider store={PomodoreStore}>
-        <div>
+        <div className="container">
           <div>
             <Timer/>
             <Tasks/>
